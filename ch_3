@@ -1,0 +1,130 @@
+# for_loop.py
+# -------------------------------------------------------------------------
+# Use a for loop to generate multiple solutions to the quadratic equation.
+# ------------------------------------------------------------------------- 
+import numpy as np
+
+b,c = 2, -1
+for a in np.arange(-1, 2, 0.3):
+    x = (-b+ np.sqrt(b**2 - 4*a*c))/(2*a)
+print("a= {:.4f}, x= {:.4f}".format(a,x))
+
+for i in range(1, 21): print(i, i**3)
+
+# while_loop.py
+# -------------------------------------------------------------------------
+# Use a while loop to generate multiple solutions to the quadratic equation.
+# ------------------------------------------------------------------------- 
+#import numpy as np
+
+a, b, c = 2, 2, -1
+while (b**2 - 4*a*c >= 0):
+    x = (-b + np.sqrt(b**2 - 4*a*c)) / (2*a)
+    print("a = {:.4f}, x = {:.4f}".format(a,x))
+    print(b**2 - 4*a*c)
+    a = a - 0.3
+print("done!")
+print(b**2 - 4*a*c)
+
+#very long loops might be good idea to get progress updates
+for ii in range(10**6):
+    if ii % 10**5 == 0: print("{:.0f} percent complete".format( 100*ii/10**6 ))
+
+# vectorize.py
+# -------------------------------------------------------------------------
+# Use vectorized operations to generate multiple solutions to the
+# quadratic equation.
+# ------------------------------------------------------------------------- 
+import numpy as np
+
+b, c = 2, -1
+a = np.arange(-1, 2, 0.3)
+x = (-b + np.sqrt(b**2 - 4*a*c)) / (2*a)
+print(a, "\n", x)
+
+#e^(-x^2)
+x = np.arange(-10, 10, 1)
+y = np.exp(x**2)
+for i in np.arange(x.size):
+    print("{:.0f}, {:.0f}".format(x[i], y[i]))
+
+#e^-mu*mu^n/n!
+from scipy.special import factorial
+N = 10
+mu = 2
+n = np.linspace(0, N, N+1)
+y = (np.exp(-1*mu))*(mu**n)/factorial(n)
+print(y)
+
+s = str(3)
+print(s)
+np.sqrt(3)
+
+#import math 
+#for x in np.arange(-1,8):
+#    assert (x>0), "I do not know how to take the log of {}!".format(x)
+#im    print(x, np.log(x))
+
+# Calculate how long an object is in the air when thrown from a specified height
+# with a range of initial speeds assuming constant acceleration due to gravity:
+#   0.5 * g * t**2 - v0 * t - y0 = 0
+# ----------------------------------------------------------------------------- 
+import numpy as np
+
+#%% Initialization of variables.
+initial_speed = 0.0         # v0 = initial vertical speed of ball in [m/s]
+impact_time = 0.0           # t = time of impact in [s] (computed in loop)
+
+#%% Initialization of parameters.
+g = 9.8066                  # gravitational acceleration in [m/s^2]
+initial_height = 2.0        # y0 = height ball is thrown from in [m]
+speed_increment = 5.0       # how much to increase speed in [m/s] for each iteration
+cutoff_time = 10.0          # stop computing after impact time exceeds cutoff
+
+#%% Calculate and display impact time.  Increment initial speed each step.
+#   Repeat until impact time exceeds cutoff.
+while impact_time < cutoff_time:
+    # Use quadratic equation to solve kinematic equation for impact time:
+    impact_time = (np.sqrt(initial_speed**2 + 2 * g * initial_height) + initial_speed) / g
+    print("speed= {} m/s; time= {:.1f} s".format(initial_speed, impact_time))
+    initial_speed += speed_increment
+print("Calculation complete.")
+
+# -----------------------------------------------------------------------------
+# This script illustrates branching.
+# ----------------------------------------------------------------------------- 
+import numpy as np
+
+for trial in range(5):
+    userInput = input('Pick a number: ')
+    userNumber = float(userInput)
+    if userNumber < 0:
+        print('Square root is not real.')
+    else:
+        print('Square root of {} is {:.4f}.'.format(userNumber, np.sqrt(userNumber)))
+    userAgain = input('Another [y/n]? ')
+    if userAgain != 'y':
+        break
+
+if trial == 4:
+    print('Sorry, only 5 per customer.')
+elif userAgain == 'n':
+    print('Bye!')
+else:
+    print('Sorry, I did not understand that.')
+
+# nesting.py
+# -------------------------------------------------------------------------
+# Use nested for loops to fill a two-dimensional array of values.
+# ------------------------------------------------------------------------- 
+import numpy as np
+
+# Set dimensions of array.
+rows = 3
+columns = 4
+
+# Create empty array then fill with values.
+A = np.zeros((rows, columns))
+for i in range(rows):
+    for j in range(columns):
+        A[i, j] = i**2 + j**3
