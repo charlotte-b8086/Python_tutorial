@@ -30,12 +30,7 @@ def logistic_eqn(t, x, params):
 def solve_logistic(x0, tstart, tstop, params):
     '''Solve the logistic equation with given initial condition, start time,
     end time, and parameters.'''
-
-<<<<<<< HEAD
     #y0 = np.array([x0]) # initial condition must be given as an array
-=======
-    y0 = np.array([x0]) # initial condition must be given as an array
->>>>>>> dc7780146d31fe677cf18eae089c94531813b446
 
     tmesh = np.linspace(tstart,tstop,1000) # force recorded solutions at these points.
     # this can be passed into the t_eval argument of solve_ivp.
